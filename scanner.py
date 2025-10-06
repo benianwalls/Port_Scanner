@@ -1,22 +1,28 @@
+#imports
 import socket   
-import sys
+from concurrent.futures import ThreadPoolExecutor
 #def function, target= ip address, ports= list of ports
-def scan_ports(target, ports):
-    print(f"Scanning {target} for open ports...")
-    #Empty list to hold open ports
-    open_ports = []
-    for port in ports:
-        # socket af_inet = ipv4, sock_stream = tcp
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # Set a timeout for the connection attempt, so doenst loop
-        sock.settimeout(1)  
-        # 0 means success, anything else is failure
-        result = sock.connect_ex((target, port))
-        if result == 0:
-            #if successful, add to open ports list
-            open_ports.append(port)
-        # Close the socket after checking each port
-        sock.close()
-    return open_ports
 
-#def grab_banner(target, port):
+class portScanner():
+    def __init__(self):
+        pass
+    def portScanner(target, port):
+
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+                s.settimeout(1)
+                result = s.connect_ex((target, port))
+                #open port
+                if result == 0:
+                    print(f"Port: {port} is open")
+                #Filtered ports
+                elif result in [111,113]:
+                    print(f"Port: {port} is filtered")
+                #closed port
+                else:
+                    print(f"Port: {port} is closed")
+
+
+        except Exception as e:
+            print(f"Exception Error: {e}")
+   
