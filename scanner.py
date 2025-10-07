@@ -17,9 +17,11 @@ class portScanner():
                 if result == 0:
                     print(f"Port: {port} is open")
                 #closed ports
+                # If scanning more just apss rather tahn printing statemetn
                 elif result in [111,113]:
                     print(f"Port: {port} is closed")
                 #filtered port
+                # IF scanning more just pass rather than printing statement
                 else:
                     print(f"Port: {port} is filtered")
 
@@ -30,6 +32,7 @@ class portScanner():
     def threader(target, thread_count=500):
         #Will be responsible for creating multiple threads, paralle scanning
         ports = [20,21,22,23,25,53,80,110,143,443,995,3389]
+        #Adjustable with any range
         with ThreadPoolExecutor(max_workers=thread_count) as executor:
             for port in ports:
                 executor.submit(portScanner.portScanner, target, port)
