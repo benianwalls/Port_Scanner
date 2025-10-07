@@ -35,5 +35,12 @@ class portScanner():
                 executor.submit(portScanner.portScanner, target, port)
             executor.shutdown(wait=True)
             print("Port Scanning Completed")
-
+    def main():
+        #Perfoming class wide logic
+        choice = input("Enter target domain ").strip().lower()
+        target = socket.gethostbyname(choice)
+        portScanner.threader(target=target)
+        
+if __name__ == "__main__":
+    portScanner.main()
     
