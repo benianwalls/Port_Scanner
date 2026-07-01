@@ -1,5 +1,5 @@
 # Simple TCP Port Scanner (learning)
-A beginner-friendly Python Port scanner that performs basic port scanning in python
+A  Python Port scanner that performs basic port scanning in python
 Repository contains:
 - "scanner.py" - the original scanner class (portScanner) that uses socket and ThreadPoolExecutor.
 ## Features
